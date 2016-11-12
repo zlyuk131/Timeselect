@@ -66,6 +66,8 @@
 /*-------------------- Modal header --------------------------*/
 #t-input-name {
   display: inline-block;
+  font-size: 16px;
+  font-family: serif;
   max-width: 80%;
   overflow: hidden;
   white-space: nowrap;
@@ -74,12 +76,28 @@
 /*-------------------- Modal body --------------------------*/
 #t-modal-body{
   height: 100px;
+  width: 290px;
 }
+
 #t-modal-body div {
   display: inline-block;
   position: relative;
+  height: 40px;
   top: 36px;
   left:45px;
+}
+#t-modal-body div:first-child {
+    margin-left: -26px;
+}
+#t-modal-body div:nth-child(odd) {
+  width: 130px;
+}
+#t-modal-body div:nth-child(2) {
+  width: 10px;
+  text-align: center;
+}
+#t-modal-body div:last-child {
+    margin-left: 9px;
 }
 
 #t-modal-colon{
@@ -104,13 +122,15 @@
   left: 33px;
 }
 #t-modal-minute, #t-modal-hour {
-  font-size: 16px;
+  font-size: 16px !important;
+  line-height: 20px !important;
   text-align: center;
   width: 30px !important;  
 }
 
 .t-arrow-up, 
 .t-arrow-down {
+  line-height: 20px !important;
   padding: 2px 3px !important; 
   width: 30px;
   margin: 0 !important;
@@ -119,12 +139,12 @@
 
 .t-arrow-up {
   bottom: 34px !important;
-  right: 11px !important;
+  right: 1px !important;
 }
 
 .t-arrow-down {
   top: 34px !important;
-  right: 52px !important;
+  right: 34px !important;
 }
 
 .t-arrow-up:hover, 

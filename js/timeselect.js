@@ -360,7 +360,6 @@ window.onload = function(){
                 }
             }
 
-
             /*
             * Timeselect -> isModal function
             * Check if event target element is part of popover HTML
@@ -442,11 +441,11 @@ window.onload = function(){
                                     arrows keys - 'keys' or numbers - 'numbers'. Default is - 'keys'
             * @return {String/Boolean} validationResult - ither valid strig or false (if validation failed)
                                     IF VALIDATION FAILED self.errors timeselect variable will be updated with error message
-                                    this error message can be used to display 
+                                    which is used to display to user
             */
             function timeValidator(timeValueStr, action, timeConstraints, inputMethod = 'keys') {
-                // create array variables of valid string values for 
-                timeValueInt = parseInt(timeValueStr);
+                // parse time in to integer
+                var timeValueInt = parseInt(timeValueStr);
                 var validationResult = false;
                 // array of strings used for time notation
                 var validTimeStrings = [];
@@ -517,8 +516,9 @@ window.onload = function(){
                                 } else if (timeValueStr != maxTimeStr && action == 'up'){ 
                                     validationResult = timeValidatorHelper(timeValueInt, validTimeStrings, action, step);
                                 } else {
+                                    //User error message set
                                     validationResult = timeValueStr;
-                                     self.errors['userMessages'].push('Time constrains: min-'+minTimeStr+', max-'+maxTimeStr);
+                                     self.errors['userMessages'].push('Time constrains: HOUR min-'+minTimeStr+', max-'+maxTimeStr);
                                 }
                             }
                         // no time constraints
@@ -529,8 +529,9 @@ window.onload = function(){
                     case 'minute':
                         // Time constraint data is defined in the input field
                         if(typeof constraintTimeStrings != 'undefined') {
-                            // value is within constraint array string and no step constraint
+                            // value is within constraint array string
                             if (constraintTimeStrings.indexOf(timeValueStr) != -1) {
+                                // no step constraint
                                 if (!step && timeValueStr != minTimeStr  && action == 'down') {
                                     validationResult = timeValidatorHelper(timeValueInt, validTimeStrings, action, step);  
 
@@ -543,7 +544,7 @@ window.onload = function(){
                                     } 
                                 }else if (step && timeValMinusStepStr == minTimeStepStr && action =='down') {
                                     validationResult = timeValueStr;
-                                    self.errors['userMessages'].push('Time constrains: min-'+minTimeStr+', max-'+maxTimeStr);
+                                    self.errors['userMessages'].push('Time constrains:  min-'+minTimeStr+', max-'+maxTimeStr);
                                 } else if (!step && timeValueStr != maxTimeStr && action == 'up'){ 
                                     validationResult = timeValidatorHelper(timeValueInt, validTimeStrings, action, step);
                                 } else if(step && timeValPlusStepStr != maxTimeStepStr && action =='up') {

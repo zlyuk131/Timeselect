@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <title>Time picker DEMO</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/font-awesome.css"> -->
+
+    <link rel="stylesheet" type="text/css" href="css/w3.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/normalize.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/timeselect.css">
+    <style type="text/css">
+        /* Just to center things */
+        .center {
+          margin: 0 auto;
+          width: 30%;
+        }
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+        #instructions {
+            margin:2em auto;
+            width: 80%;
+        }
+        .italic {
+            font-style: italic;
+        }
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id ="w3-container instructions">
+        <div class="w3-row">
+            <div class="w3-col 2m"><p></p></div>
+            <div class="w3-col 8m">
+                
+                <table>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td> Click:</td>
+                        <td> 
+                            <span class="italic bold">Select time fiels</span> - Click on either hour or minute tab <br>
+                            <span class="italic bold">Change between time fields</span> - Click ither on designated arrow for specific field or tap any where in the popover window outside of<br>
+                            <span class="italic bold">Update time</span> - click on either arrow buttons to increas or decrease the time. NOTE! if data-hour or data-minute min and max values are set up selection outside of those values is not possible
+                             <span class="italic bold">Change input field</span>- click anywhere outside of popover or active time input field<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Arrow keys:</td>
+                        <td>
+                            <span class="italic bold">Select time fiels</span> - No option to select by default hour field is selected<br>
+                            <span class="italic bold">Change between time fields</span> - arraws left and write will swap between fields<br>
+                            <span class="italic bold">Update time</span> - ARROW UP : increment, ARROW DOWN: decrement, NUMBER keys: NOT IMPLEMENTED YET(set time explicitly if two characters limit exceeded input reset to first integer input), ENTER key: NOT IMPLEMENTED YET(confirm explicit number entry and move to next time field), <br>
+                            <span class="italic bold">Change input field</span> - TAB key: moves to next input field, if this field has class name timeselect - timeselect is initiated, ESC key: close modal and deselects input<br>
+                        </td>
+                    </tr>
+                </table> 
+            </div>
+            <div class="w3-col m2"><p></p></div>
+        </div>
+    </div>
+    <br>
+    <div class="w3-container" >
+        <div class="w3-row">
+            <div class="w3-col m2">
+                <p></p>
+            </div>
+            <div class="w3-col m6">
+                <form class="w3-container">
+                
+                      <label for="starttime">Start time:</label>
+                      <!-- to inpose specific time select settings use following format. Some or all data attributes may be omitted -->
+                      <!-- !NOTE no spaces allowed between values data-hours="min,max" data-minutes="min,max" data-step="5 || 10" -->
+                      <input type="text" name="starttime" id="starttime" class="w3-input timeselect" data-hour="10,2" data-minute="41,4" data-step="5" >
+                    
+                      <label for="firstname">First name:</label>
+                      <input type="text" name="firstname" id="firstname" class="w3-input">
+            
+                    
+                      <label for="endtime">End time:</label>
+                      <input type="text" name="endtime" id="endtime" class="w3-input timeselect" data-hour="0,2" data-minute="10,50" data-step="5">  
+            
+                    
+                        <label for="notime">No time:</label>
+                        <input type="text" id="notime" name="endtime" class="w3-input timeselect"><br>
+            
+                    
+                        <label for="lastname">Last name</label>
+                        <input type="text" name="lastname" id="lastname" class="w3-input">
+            
+                    </form>
+            </div>
+            <div class="w3-co m4"><p></p></div>
+        </div>
+    </div>    
+    <script type="text/javascript" src="js/timeselect.js">
+    </script>
+</body>
+</html>

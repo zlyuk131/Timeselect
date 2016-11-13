@@ -534,17 +534,17 @@ window.onload = function(){
                                 // no step constraint
                                 if (!step && timeValueStr != minTimeStr  && action == 'down') {
                                     validationResult = timeValidatorHelper(timeValueInt, validTimeStrings, action, step);  
-
+                                //     
                                 } else if (step && timeValMinusStepStr != minTimeStepStr && action == 'down'){
                                     if (constraintTimeStrings.indexOf(timeValMinusStepStr) != -1 ){
                                         validationResult = timeValidatorHelper(timeValueInt, validTimeStrings, action, step);
                                     } else if (constraintTimeStrings.indexOf(timeValMinusStepStr) == -1 ) {
                                         validationResult = timeValueStr;
-                                        self.errors['userMessages'].push('Time constrains: min-'+minTimeStr+', max-'+maxTimeStr);
+                                        self.errors['userMessages'].push('Time constrains: MINUTE min-'+minTimeStr+', max-'+maxTimeStr);
                                     } 
                                 }else if (step && timeValMinusStepStr == minTimeStepStr && action =='down') {
                                     validationResult = timeValueStr;
-                                    self.errors['userMessages'].push('Time constrains:  min-'+minTimeStr+', max-'+maxTimeStr);
+                                    self.errors['userMessages'].push('Time constrains: MINUTE  min-'+minTimeStr+', max-'+maxTimeStr);
                                 } else if (!step && timeValueStr != maxTimeStr && action == 'up'){ 
                                     validationResult = timeValidatorHelper(timeValueInt, validTimeStrings, action, step);
                                 } else if(step && timeValPlusStepStr != maxTimeStepStr && action =='up') {
@@ -552,14 +552,14 @@ window.onload = function(){
                                         validationResult = timeValidatorHelper(timeValueInt, validTimeStrings, action, step);
                                     } else if (constraintTimeStrings.indexOf(timeValPlusStepStr) == -1 ) {
                                          validationResult = timeValueStr;
-                                         self.errors['userMessages'].push('Time constrains: min-'+minTimeStr+', max-'+maxTimeStr);
+                                         self.errors['userMessages'].push('Time constrains: MINUTE min-'+minTimeStr+', max-'+maxTimeStr);
                                     } 
                                 } else if(step && timeValPlusStepStr == maxTimeStepStr && action =='up') {
                                     validationResult = timeValueStr;
-                                    self.errors['userMessages'].push('Time constrains: min-'+minTimeStr+', max-'+maxTimeStr);
+                                    self.errors['userMessages'].push('Time constrains: MINUTE min-'+minTimeStr+', max-'+maxTimeStr);
                                 } else {
                                     validationResult = timeValueStr;
-                                     self.errors['userMessages'].push('Time constrains: min-'+minTimeStr+', max-'+maxTimeStr);
+                                     self.errors['userMessages'].push('Time constrains: MINUTE min-'+minTimeStr+', max-'+maxTimeStr);
                                 }
                             }
                         } else {
@@ -571,7 +571,7 @@ window.onload = function(){
             }
 
             /**
-            * TimeValidator -> TimeValidatorHelper function
+            * Timeselect ->TimeValidator -> TimeValidatorHelper function
             * function performs increment and decrement on time string by traversing time string set
             * @param {Int} timeValueInt - 
             * @param {Array} validTimeStrings - array of valid time strings
@@ -661,8 +661,6 @@ window.onload = function(){
                 return noErrors;
             }
 
-           
-
             /*
             * Timeselect -> clearAllFocused function
             * remove all specified class name's from elements with specified class selector
@@ -690,7 +688,7 @@ window.onload = function(){
             }
 
             /**
-            * TImeselect -> inputUpdate funciton
+            * Timeselect -> inputUpdate funciton
             * Update input with values from timeselect
             * @param {String} timeField - 
             * @param {String} value -  
@@ -715,7 +713,7 @@ window.onload = function(){
             }
 
             /**
-            * displayUserMessage function
+            * Timeselect -> displayUserMessage function
             * Diplay relevant time error message
             */
             function displayUserMessage() {
@@ -752,10 +750,10 @@ window.onload = function(){
             }
 
             /**
-            * 
-            *
+            * Timeselect -> userMessageState function
+            * Function controls transition of the error messages from the input field to Timeselect module error field
             */
-            function (){
+            function userMessageState() {
 
             }
         /* END Timeselect obj */
@@ -783,6 +781,7 @@ window.onload = function(){
         */
         function inputSetInitialValue(el) {
             var inputValues = []
+            // dataset - check data attributes of the input element
             if(typeof el.dataset.hour != 'undefined') {
                 var minHour = el.dataset.hour.split(',')[0];
                 inputValues.push(minHour.toString().length == 1 ? '0'+minHour.toString() : minHour.toString());

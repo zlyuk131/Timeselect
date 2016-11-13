@@ -83,11 +83,11 @@ window.onload = function(){
             // named array to hold time settings from input field data attributes
             self.timeSettings;
             // error handling array
-            self.errors = {'userMessages' : [], 'appErrors' : {}};
+            self.errors = {userMessages : {}, appErrors : {}};
            
             /**
             * Timeselect input timeselect keydown DOM event handle
-            * THIS EVENT IS RUNS FIRST TO CREATE TIME SELECT MODAL
+            * THIS EVENT RUNS FIRST TO CREATE TIME SELECT MODAL
             */
             self.runInputFocus = function(event) {
                  self.htmlElem = event.target;
@@ -315,7 +315,7 @@ window.onload = function(){
                 self.inputElem = null;
                 self.activeTimeElem = null;
                 // reset errors
-                self.errors = {'userMessages' : [], 'appErrors' : {}};
+                self.errors = {userMessages : {}, appErrors : {}};
             }
 
              /**
@@ -518,7 +518,7 @@ window.onload = function(){
                                 } else {
                                     //User error message set
                                     validationResult = timeValueStr;
-                                     self.errors['userMessages'].push('Time constrains: HOUR min-'+minTimeStr+', max-'+maxTimeStr);
+                                     self.errors.userMessages[timeConstraints.subject] = 'Time constrains: HOUR min-'+minTimeStr+', max-'+maxTimeStr;
                                 }
                             }
                         // no time constraints
@@ -540,11 +540,12 @@ window.onload = function(){
                                         validationResult = timeValidatorHelper(timeValueInt, validTimeStrings, action, step);
                                     } else if (constraintTimeStrings.indexOf(timeValMinusStepStr) == -1 ) {
                                         validationResult = timeValueStr;
-                                        self.errors['userMessages'].push('Time constrains: MINUTE min-'+minTimeStr+', max-'+maxTimeStr);
+                                        self.errors.userMessages[timeConstraints.subject] = 'Time constrains: MINUTE  min-'+minTimeStr+', max-'+maxTimeStr;
+                                    console.log(self.errors.userMessages.minute);
                                     } 
                                 }else if (step && timeValMinusStepStr == minTimeStepStr && action =='down') {
                                     validationResult = timeValueStr;
-                                    self.errors['userMessages'].push('Time constrains: MINUTE  min-'+minTimeStr+', max-'+maxTimeStr);
+                                    self.errors['userMessages'].push({'minute':'Time constrains: MINUTE  min-'+minTimeStr+', max-'+maxTimeStr});
                                 } else if (!step && timeValueStr != maxTimeStr && action == 'up'){ 
                                     validationResult = timeValidatorHelper(timeValueInt, validTimeStrings, action, step);
                                 } else if(step && timeValPlusStepStr != maxTimeStepStr && action =='up') {
@@ -712,7 +713,7 @@ window.onload = function(){
                 self.inputElem.setSelectionRange(resetIinputHigllight[0],resetIinputHigllight[1]);
             }
 
-            /**
+            /**!!TODO remove copy error messages
             * Timeselect -> displayUserMessage function
             * Diplay relevant time error message
             */
@@ -721,8 +722,9 @@ window.onload = function(){
                 // input field error message
                 var inputErrorMsgElem = getThisInputError(self.inputElem) ? getThisInputError(self.inputElem) : false;
                 console.log(self.errors);
-                //if there are time select constraint errors
-                if(self.errors.userMessages.length != 0){
+                //if Timeselect constraint errors
+                if(xOR(typeof self.errors.userMessages.hour != 'undefined', typeof self.errors.userMessages.minute != 'undefined')){
+                    console.log('xOR passed');
                     // change colour of active time field
                     self.activeTimeElem.classList.add('t-timefield-error');
                     // change color of the input field
@@ -754,7 +756,7 @@ window.onload = function(){
             * Function controls transition of the error messages from the input field to Timeselect module error field
             */
             function userMessageState() {
-
+                //input error messages  
             }
         /* END Timeselect obj */
         }
@@ -797,10 +799,11 @@ window.onload = function(){
             el.value = inputValues[0]+":"+inputValues[1];
         }
 
-        /*!!TODO top position is not calculated properly
+        /*
         * generateTimeSelectHtml function
-        * Function generates html element of the timeselect popover and assigns top position  
+        * Function generates html element of the Timeselect modal 
         * to it related to input elem that is calling it
+        * @param { DOM obj} inputElem - activating input element
         */
         function generateTimeSelectHtml(inputElem) {
             // check value of input field initiated

@@ -1,4 +1,4 @@
-# Timeselect v0.3.0
+# Timeselect v0.3.1
 Simple Vanilla Javascript Time picker applet does not require any additional Javascript libraries.
 This app requires time
 

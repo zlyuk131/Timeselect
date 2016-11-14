@@ -1,5 +1,5 @@
 /**
-* Timeselect Script 0.3.1
+* Timeselect Script 0.3.2
 * Script allows user to pick time from input field in popover interface.
 * Script allows user to select time range and step in minutes.
 * Display error message when time selected is outside of time range
@@ -749,12 +749,14 @@ window.onload = function(){
                         inputErrorMsgElem.innerHTML = inputErrorMsgElem.innerHTML + self.errors.userMessages.message +'<br>';
                     }
                     // reset error messages after being displayed
-                    self.errors.resetValues;
-                } else if (self.errors.userMessages.length == 0) {
+                    self.errors.resetValues.call(self.errors);
+                } else if (typeof self.errors.userMessages.type == 'undefined' && typeof self.errors.userMessages.message == 'undefined') {
                     self.activeTimeElem.classList.remove('t-timefield-error');
+                    // if(self.activeTimeElem.classList.contains(''))
                     self.inputElem.classList.remove('timeselect-active-error')
                     // remove error messages from modal footer field
                     modalFooter.innerHTML= '';
+                    // remove input element error
                     if (inputErrorMsgElem ) {
                         inputErrorMsgElem.remove();
                     }
